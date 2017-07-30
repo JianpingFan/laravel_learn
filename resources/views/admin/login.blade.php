@@ -26,15 +26,26 @@
 <body class="user-select">
 <div class="container">
     <div class="siteIcon"><img src="images/icon/icon.png" alt="" data-toggle="tooltip" data-placement="top" title="欢迎使用异清轩博客管理系统" draggable="false" /></div>
-    <form action="/Index/login" method="post" autocomplete="off" class="form-signin">
-        <h2 class="form-signin-heading">管理员登录</h2>
+    <form action="login" method="post" autocomplete="off" class="form-signin">
+        {{csrf_field()}}
+        <h2 class="form-signin-heading" style="text-align: center;">管理员登录</h2>
+        <div style="text-align: center;"><span style="color: darkred;">
+                @if(session('msg'))
+                    {{session('msg')}}
+                @endif
+            </span>
+        </div>
         <label for="userName" class="sr-only">用户名</label>
         <input type="text" id="userName" name="username" class="form-control" placeholder="请输入用户名" required autofocus autocomplete="off" maxlength="10">
         <label for="userPwd" class="sr-only">密码</label>
-        <input type="password" id="userPwd" name="userpwd" class="form-control" placeholder="请输入密码" required autocomplete="off" maxlength="18">
+        <input type="password" id="userPwd" name="password" class="form-control" placeholder="请输入密码" required autocomplete="off" maxlength="18">
         <label for="userPwd" class="sr-only">验证码</label>
-        <input type="password" id="userPwd" name="code" class="form-control" placeholder="请输入验证码" required autocomplete="off" maxlength="18">
-        <img src="#">
+        <input type="password" id="userPwd" name="code" class="form-control" placeholder="请输入验证码" required autocomplete="off" maxlength="18" style="width: 58%;display: inline-block;">
+        <img src="{{captcha_src()}}}" style="display: inline-block;
+    border: 1px solid #CCC;
+    height: 43px;
+    width: 121px;
+    margin-top: -5px;" onclick="this.src=this.src+'?'+Math.random();">
         <a href="main.html"><button class="btn btn-lg btn-primary btn-block" type="submit" id="signinSubmit">登录</button></a>
     </form>
     <div class="footer">
