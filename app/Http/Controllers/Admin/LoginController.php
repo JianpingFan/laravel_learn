@@ -25,11 +25,8 @@ class LoginController extends CommonController
                 return back()->with('msg','验证码错误');
             }
             $admin = User::where('user_name','admin')->first();
-            $rules = ['username' => 'required','password'=>'required'];
-            $admin_p = Crypt::decrypt($admin->user_pass);
-            $input['password'] = $admin_p;
-            $validator = Validator::make($input,$rules);
-            if($validator->fails())
+            //手动验证
+            if($input['username'] != $admin->user_name  ||  $input['password'] != (Crypt::decrypt($admin->user_pass)))
             {
                 return back()->with('msg','用户名或者密码错误');
             }
