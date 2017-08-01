@@ -17,4 +17,5 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     Route::any('admin/login',"Admin\LoginController@login");
+    Route::any('admin/index',"Admin\IndexController@index");
 });
